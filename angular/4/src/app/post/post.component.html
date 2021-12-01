@@ -1,0 +1,6 @@
+<div appResponsive="red" [dStyle]="{marginTop: '30px' }"  *ngIf="post" (click)="onClick(post)">
+  <h2>{{post.title}}</h2>
+  <p> #{{post.id}} - {{post.text}} </p>
+  <ng-content></ng-content>
+  <button class="btn" (click)="removePost()">&#10006;</button>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+    <input type="text" placeholder="Email" formControlName="email">
+
+    <h1>Angular Forms</h1>
+    <div class="form-control" *ngIf="form.get('email') as control">
+      <label>Email</label>
+      <input type="text" placeholder="Email" formControlName="email">
+      <div class="validation" *ngIf="control.invalid && control.touched">
+        <small *ngIf="control.hasError('required')">Поле email не может быть пустым. </small>
+        <small *ngIf="control.hasError('email')">Введите корректный email. </small>
+      </div>
+    </div>
+    <div class="form-control" *ngIf="form.get('password') as control">
+      <label>Пароль</label>
+      <input type="password" placeholder="Пароль" formControlName="password">
+      <div class="validation" *ngIf="control.touched && control.invalid">
+        <small *ngIf="control.hasError('required')">Поле password не может быть пустым.</small>
+        <small *ngIf="control.hasError('minLength')">Значение password слишком коротко.</small>
+        <small *ngIf="control.hasError('restrictedRusEmail')" >Email {{control.value}} запрещен Законом Украины </small>
+      </div>
+
+    </div>
+    <div class="card" formGroupName="address">
+      <h2>Адрес</h2>
+      <div class="form-control">
+        <label>Страна</label>
+        <select formControlName="country">
+          <option value="ua">Украина</option>
+          <option value="pl">Польша</option>
+          <option value="de">Германия</option>
+        </select>
+      </div>
+      <div class="form-control">
+        <input type="text" formControlName="city">
+      </div>
+      <button class="btn" type="button" (click)="setCapital()">Выбрать столицу</button>
+    </div>
+    <div class="card" formArrayName="skills" *ngIf="this.form.get('skills') as array">
+      <h2>Ваши навыки</h2>
+      <button class="btn" type="button" (click)="addSkill()">Добавить умение</button>
+      <div class="form-control" *ngFor="let control of unwrap(array); let idx=index">
+        <label>Умение {{idx+1}}</label>
+        <input type="text" [formControlName]="idx">
+        <button class="btn" type="button" (click)="removeSkill(idx)">Удалить умение</button>
+      </div>
+    </div>
+    <button class="btn" type="button" [disabled]="form.invalid">Отправить</button>
+  </form>
+</div>

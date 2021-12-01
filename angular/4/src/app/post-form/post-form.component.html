@@ -1,0 +1,11 @@
+<div>
+  <input type="text" class="form-control" #inputText placeholder="Title..." [(ngModel)]="title">
+  <input type="text" class="form-control" #inputTitle placeholder="Text..." [(ngModel)]="text">
+  <button class="btn" (click)="addPost()">Add post!</button>
+  <button class="btn" (click)="onLoadDefault()">Default style</button>
+  <hr/>
+  <h2>Search posts!</h2>
+  <input type="text" class="form-control" (keyup)="onChangeSearch(titleSearching)" [(ngModel)]="titleSearching" placeholder="Search...">
+  <button class="btn" (click)="setSearchKey('text')">Search by text</button>
+  <button class="btn" (click)="setSearchKey('title')">Search by title</button>
+</div>
